@@ -8,6 +8,7 @@ import (
 	"gorm.io/gorm"
 
 	"backend-commerce/config"
+	"backend-commerce/models"
 )
 
 var DB *gorm.DB
@@ -33,4 +34,27 @@ func InitDB() {
 	}
 
 	fmt.Println("Database connected successfully!")
+
+	// **Auto Migrate Models**
+	err = DB.AutoMigrate(
+		&models.User{},
+		&models.Role{},
+		&models.Permission{},
+		&models.Category{},
+		&models.Slider{},
+		&models.Product{},
+		&models.ProductImage{},
+		&models.Review{},
+		&models.Address{},
+		&models.Order{},
+		&models.OrderItem{},
+		&models.Cart{},
+		&models.Payment{},
+	)
+
+	if err != nil {
+		log.Fatal("Failed to migrate database:", err)
+	}
+
+	fmt.Println("Database migrated successfully!")
 }
