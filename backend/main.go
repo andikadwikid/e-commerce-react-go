@@ -5,6 +5,7 @@ import (
 
 	"backend-commerce/config"
 	"backend-commerce/database"
+	seeders "backend-commerce/database/seeder"
 )
 
 func main() {
@@ -13,6 +14,9 @@ func main() {
 
 	// inisialisasi database
 	database.InitDB()
+
+	//run seeders
+	seeders.Seed()
 
 	router := gin.Default()
 
