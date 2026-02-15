@@ -6,6 +6,7 @@ import (
 	"backend-commerce/config"
 	"backend-commerce/database"
 	seeders "backend-commerce/database/seeder"
+
 )
 
 func main() {
