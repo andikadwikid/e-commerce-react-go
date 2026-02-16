@@ -1,11 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-
 	"backend-commerce/config"
 	"backend-commerce/database"
 	seeders "backend-commerce/database/seeder"
+	"backend-commerce/routes"
 
 )
 
@@ -19,13 +18,7 @@ func main() {
 	//run seeders
 	seeders.Seed()
 
-	router := gin.Default()
-
-	router.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "Hello, World!",
-		})
-	})
+	router := routes.SetupRouter()
 
 	router.Run(":" + config.GetEnv("APP_PORT", "3000"))
 }
