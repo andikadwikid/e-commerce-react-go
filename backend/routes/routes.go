@@ -27,20 +27,19 @@ func SetupRouter() *gin.Engine {
 		{
 			// Route Permissions
 			admin.GET("/permissions", middlewares.Permission("permissions-index"), adminController.FindPermissions)
-
-			// Route Baru: Get All (WAJIB diletakkan SEBELUM route /:id)
-			admin.GET("/permissions/all", middlewares.Permission("permissions-index"), adminController.GetAllPermissions)
-
-			// Route Baru: Create Permission
 			admin.POST("/permissions", middlewares.Permission("permissions-create"), adminController.CreatePermission)
-
-			// :id adalah parameter dinamis
+			admin.GET("/permissions/all", middlewares.Permission("permissions-index"), adminController.GetAllPermissions)
 			admin.GET("/permissions/:id", middlewares.Permission("permissions-show"), adminController.GetPermissionDetail)
-
-			// Route Baru: Update Permission
 			admin.PUT("/permissions/:id", middlewares.Permission("permissions-update"), adminController.UpdatePermission)
-
 			admin.DELETE("/permissions/:id", middlewares.Permission("permissions-delete"), adminController.DeletePermission)
+
+			// Route Roles
+			admin.GET("/roles", middlewares.Permission("roles-index"), adminController.FindRoles)
+			admin.POST("/roles", middlewares.Permission("roles-create"), adminController.CreateRole)
+			admin.GET("/roles/all", middlewares.Permission("roles-index"), adminController.GetAllRoles)
+			admin.GET("/roles/:id", middlewares.Permission("roles-show"), adminController.GetRoleDetail)
+			admin.PUT("/roles/:id", middlewares.Permission("roles-update"), adminController.UpdateRole)
+			admin.DELETE("/roles/:id", middlewares.Permission("roles-delete"), adminController.DeleteRole)
 		}
 	}
 
