@@ -6,7 +6,6 @@ import (
 	controllers "backend-commerce/controllers"
 	adminController "backend-commerce/controllers/admin"
 	middlewares "backend-commerce/middlewares"
-
 )
 
 func SetupRouter() *gin.Engine {
@@ -40,6 +39,12 @@ func SetupRouter() *gin.Engine {
 			admin.GET("/roles/:id", middlewares.Permission("roles-show"), adminController.GetRoleDetail)
 			admin.PUT("/roles/:id", middlewares.Permission("roles-update"), adminController.UpdateRole)
 			admin.DELETE("/roles/:id", middlewares.Permission("roles-delete"), adminController.DeleteRole)
+
+			// Route User
+			admin.GET("/users", middlewares.Permission("users-index"), adminController.FindUsers)
+			admin.POST("/users", middlewares.Permission("users-create"), adminController.CreateUser)
+			admin.PUT("/users/:id", middlewares.Permission("users-update"), adminController.UpdateUser)
+			admin.GET("/users/:id", middlewares.Permission("users-show"), adminController.GetUserDetail)
 		}
 	}
 
