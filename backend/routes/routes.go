@@ -46,6 +46,14 @@ func SetupRouter() *gin.Engine {
 			admin.PUT("/users/:id", middlewares.Permission("users-update"), adminController.UpdateUser)
 			admin.GET("/users/:id", middlewares.Permission("users-show"), adminController.GetUserDetail)
 			admin.DELETE("/users/:id", middlewares.Permission("users-delete"), adminController.DeleteUser)
+
+			// Route Category
+			admin.GET("/categories", middlewares.Permission("categories-index"), adminController.FindCategories)
+			admin.POST("/categories", middlewares.Permission("categories-create"), adminController.CreateCategory)
+			admin.GET("/categories/:id", middlewares.Permission("categories-show"), adminController.GetCategoryDetail)
+			admin.PUT("/categories/:id", middlewares.Permission("categories-update"), adminController.UpdateCategory)
+			admin.DELETE("/categories/:id", middlewares.Permission("categories-delete"), adminController.DeleteCategory)
+			admin.GET("/categories/all", middlewares.Permission("categories-index"), adminController.GetAllCategories)
 		}
 	}
 
