@@ -54,6 +54,11 @@ func SetupRouter() *gin.Engine {
 			admin.PUT("/categories/:id", middlewares.Permission("categories-update"), adminController.UpdateCategory)
 			admin.DELETE("/categories/:id", middlewares.Permission("categories-delete"), adminController.DeleteCategory)
 			admin.GET("/categories/all", middlewares.Permission("categories-index"), adminController.GetAllCategories)
+
+			// Route Slider
+			admin.GET("/sliders", middlewares.Permission("sliders-index"), adminController.FindSliders)
+			admin.POST("/sliders", middlewares.Permission("sliders-create"), adminController.CreateSlider)
+			admin.DELETE("/sliders/:id", middlewares.Permission("sliders-delete"), adminController.DeleteSlider)
 		}
 	}
 
