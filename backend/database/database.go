@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"gorm.io/driver/mysql"
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 
 	"backend-commerce/config"
@@ -18,16 +18,16 @@ func InitDB() {
 	dbUser := config.GetEnv("DB_USER", "root")
 	dbPass := config.GetEnv("DB_PASS", "password")
 	dbHost := config.GetEnv("DB_HOST", "localhost")
-	dbPort := config.GetEnv("DB_PORT", "3306")
-	dbName := config.GetEnv("DB_NAME", "db_commerce")
+	dbPort := config.GetEnv("DB_PORT", "5432")
+	dbName := config.GetEnv("DB_NAME", "db_ecommerce")
 
-	// Format DSN untuk MySQL (Data Source Name)
-	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
-		dbUser, dbPass, dbHost, dbPort, dbName)
+	// Format DSN untuk PostgreSQL
+	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+		dbHost, dbPort, dbUser, dbPass, dbName)
 
 	// Koneksi ke database
 	var err error
-	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
 	if err != nil {
 		log.Fatal("Failed to connect to database:", err)
