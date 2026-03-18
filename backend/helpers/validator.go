@@ -8,13 +8,14 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"gorm.io/gorm"
-
 )
 
 func TranslateErrorMessage(err error, request interface{}) map[string]string {
 	errorsMap := make(map[string]string)
 
 	if validationErrors, ok := err.(validator.ValidationErrors); ok {
+		// fmt.Println(err.(validator.ValidationErrors))
+
 		var typ reflect.Type
 
 		val := reflect.ValueOf(request)

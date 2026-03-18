@@ -28,3 +28,5 @@ dist/
 go.work
 go.work.sum
 backend/tmp/
+backend/public/
+.air.toml

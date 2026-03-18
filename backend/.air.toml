@@ -1,2 +1,0 @@
-cmd = "go build -o ./tmp/main ."
-  bin = "./tmp/main"

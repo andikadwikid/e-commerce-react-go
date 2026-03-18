@@ -7,7 +7,7 @@ type ProductCreateRequest struct {
 	Description string  `json:"description" form:"description" binding:"required"`
 	Price       float64 `json:"price" form:"price" binding:"required,gt=0"`
 	Stock       int     `json:"stock" form:"stock" binding:"required,gte=0"`
-	Category    uint    `json:"category" form:"category" binding:"required"`
+	CategoryId  uint    `json:"category_id" form:"category_id" binding:"required"`
 }
 
 type ProductUpdateRequest struct {
@@ -41,7 +41,7 @@ func ToProductResponse(product models.Product) ProductResponse {
 	for _, img := range product.Images {
 		url := img.ImageUrl
 		if len(url) > 0 && url[0] != '/' && len(url) < 4 || url[:4] != "http" {
-			url = "/uplaod/products/" + url
+			url = "/upload/products/" + url
 		}
 		images = append(images, ProductImageResponse{
 			Id:       img.Id,
